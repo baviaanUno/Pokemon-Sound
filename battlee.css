@@ -361,3 +361,8 @@ body {
 }
 
 .flash { animation: flash 0.3s 3; }
+
+/* Fade-out effect for sprites and icons */
+#spr-player, #spr-enemy, #hud-player-icon, #hud-enemy-icon {
+  transition: opacity 0.8s;
+}

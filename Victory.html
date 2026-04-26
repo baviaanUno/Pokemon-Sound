@@ -16,6 +16,19 @@
 			justify-content: center;
 			font-family: 'Finger Paint', cursive, sans-serif;
 		}
+		/* Confetti */
+		.confetti {
+			position: fixed;
+			width: 10px;
+			height: 10px;
+			top: -10px;
+			animation: confetti-fall 3s linear forwards;
+			z-index: 999;
+		}
+		@keyframes confetti-fall {
+			0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+			100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+		}
 		.victory-banner {
 			background: #0A6D3C;
 			border: 6px solid #02701a;
@@ -78,6 +91,17 @@
 	</div>
 	<script src="voice.js"></script>
 	<script>
+		// Confetti on page load
+		const confettiColors = ['#ff0', '#0f0', '#00f', '#f0f', '#0ff', '#fa0'];
+		for (let i = 0; i < 50; i++) {
+			const conf = document.createElement('div');
+			conf.className = 'confetti';
+			conf.style.left = Math.random() * 100 + 'vw';
+			conf.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+			conf.style.animationDelay = Math.random() * 2 + 's';
+			conf.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+			document.body.appendChild(conf);
+		}
 		// Allow click as fallback for restart
 		document.getElementById('restart-box').onclick = function() {
 			window.location.href = 'index.html';

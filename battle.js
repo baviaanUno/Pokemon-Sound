@@ -47,7 +47,6 @@ const S = {
   enemyBurned: false
 };
 
-let secs = 0;
 let timerInterval = null;
 const $ = id => document.getElementById(id);
 
@@ -108,14 +107,32 @@ function buildMoveButtons() {
 }
 
 /* ── TIMER ── */
+const MOVE_TIME_LIMIT = 120; // 2 minutes in seconds
+let secs = MOVE_TIME_LIMIT;
+
 function startTimer() {
   if (timerInterval) return;
+  updateTimerDisplay();
   timerInterval = setInterval(() => {
-    secs++;
-    const m = String(Math.floor(secs / 60)).padStart(2, '0');
-    const s = String(secs % 60).padStart(2, '0');
-    $('timer').textContent = m + ':' + s;
+    secs--;
+    updateTimerDisplay();
+    if (secs <= 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      confirmExitToIndex();
+    }
   }, 1000);
+}
+
+function resetTimer() {
+  secs = MOVE_TIME_LIMIT;
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const m = String(Math.floor(secs / 60)).padStart(2, '0');
+  const s = String(secs % 60).padStart(2, '0');
+  $('timer').textContent = m + ':' + s;
 }
 
 /* ── HP BAR ── */
@@ -188,13 +205,16 @@ async function executeMove(move) {
   }
 
   if (S.ehp <= 0) {
+    fadeOutSpriteAndIcon('e');
     await say(`${enemyName} fainted! You win! 🎉`, 2000);
     S.busy = false;
     setTimeout(() => { window.location.href = 'Victory.html'; }, 800);
     return;
   }
 
+  resetTimer();
   await enemyTurn();
+  resetTimer();
   S.busy = false;
 }
 
@@ -237,6 +257,7 @@ async function enemyTurn() {
   }
 
   if (S.php <= 0) {
+    fadeOutSpriteAndIcon('p');
     await say(`${player.name} fainted! Game over.`, 2000);
     setTimeout(() => { window.location.href = 'Defeat.html'; }, 800);
     return;
@@ -257,7 +278,7 @@ function getEnemyMoves() {
 /* ── VOICE COMMAND HANDLER (called by voice.js) ── */
 window.battleVoiceCommand = function(cmd) {
   if (cmd === player.confirmCmd) {
-    window.location.href = 'index.html';
+    confirmExitToIndex();
     return;
   }
   const move = player.moves.find(m => m.cmd === cmd);
@@ -266,3 +287,60 @@ window.battleVoiceCommand = function(cmd) {
 
 /* ── INIT ON LOAD ── */
 document.addEventListener('DOMContentLoaded', initBattleUI);
+
+function fadeOutSpriteAndIcon(who) {
+  // who: 'p' for player, 'e' for enemy
+  const sprite = document.getElementById(who === 'p' ? 'spr-player' : 'spr-enemy');
+  const icon = document.getElementById(who === 'p' ? 'hud-player-icon' : 'hud-enemy-icon');
+  if (sprite) {
+    sprite.style.transition = 'opacity 0.8s';
+    sprite.style.opacity = '0';
+  }
+  if (icon) {
+    icon.style.transition = 'opacity 0.8s';
+    icon.style.opacity = '0';
+  }
+}
+
+// Confirmation modal logic
+function showExitConfirmModal() {
+  const modal = document.getElementById('confirm-exit-modal');
+  if (!modal) return;
+  modal.style.display = 'flex';
+  // Focus Blow by default
+  setTimeout(() => { document.getElementById('confirm-blow').focus(); }, 100);
+}
+function hideExitConfirmModal() {
+  const modal = document.getElementById('confirm-exit-modal');
+  if (!modal) return;
+  modal.style.display = 'none';
+}
+// Attach modal button handlers
+window.addEventListener('DOMContentLoaded', () => {
+  const blowBtn = document.getElementById('confirm-blow');
+  const knockBtn = document.getElementById('confirm-knock');
+  if (blowBtn) blowBtn.onclick = () => { window.location.href = 'index.html'; };
+  if (knockBtn) knockBtn.onclick = hideExitConfirmModal;
+});
+
+// Intercept exit-to-index actions
+function confirmExitToIndex() {
+  showExitConfirmModal();
+}
+
+// In timer, replace window.location.href = 'index.html'; with confirmExitToIndex();
+// In battleVoiceCommand, for confirmCmd, replace window.location.href = 'index.html'; with confirmExitToIndex();
+// Voice command support in modal
+const origHandleVoiceCommand = window.handleVoiceCommand;
+window.handleVoiceCommand = function(cmd) {
+  const modal = document.getElementById('confirm-exit-modal');
+  if (modal && modal.style.display === 'flex') {
+    if (cmd.toLowerCase() === 'blow') {
+      window.location.href = 'index.html';
+    } else if (cmd.toLowerCase() === 'knock') {
+      hideExitConfirmModal();
+    }
+    return;
+  }
+  if (origHandleVoiceCommand) origHandleVoiceCommand(cmd);
+};

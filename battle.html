@@ -64,9 +64,6 @@
   <!-- Timer -->
   <div class="timer" id="timer">00:00</div>
 
-  <!-- Listening badge -->
-  <div id="listen-badge" class="listen">🎤 Listening…</div>
-
   <!-- Enemy HUD -->
   <div class="hud hud-e">
     <div class="hud-diamond">
@@ -109,6 +106,21 @@
   <!-- Dialog box -->
   <div class="dialog" id="dialog"></div>
 
+  <!-- Confirmation Modal -->
+  <div id="confirm-exit-modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.45); align-items:center; justify-content:center;">
+    <div style="background:#222; color:#fff; border-radius:18px; padding:2em 2.5em; box-shadow:0 8px 32px #000a; display:flex; flex-direction:column; align-items:center; gap:1.5em; min-width:320px;">
+      <div style="font-size:1.5em; font-family:'Finger Paint',cursive,sans-serif; margin-bottom:0.5em;">Are you sure you want to exit?</div>
+      <div style="display:flex; gap:1.5em;">
+        <button id="confirm-blow" style="background:#0A6D3C; color:#fff; border:none; border-radius:10px; font-size:1.2em; padding:0.7em 1.5em; display:flex; align-items:center; gap:0.5em; cursor:pointer; font-family:'Finger Paint',cursive,sans-serif;">
+          <img src="images/Blowwhite.svg" alt="Blow" style="width:1.5em; height:1.5em;"> Blow
+        </button>
+        <button id="confirm-knock" style="background:#8B1111; color:#fff; border:none; border-radius:10px; font-size:1.2em; padding:0.7em 1.5em; display:flex; align-items:center; gap:0.5em; cursor:pointer; font-family:'Finger Paint',cursive,sans-serif;">
+          <img src="images/Knockwhite.svg" alt="Knock" style="width:1.5em; height:1.5em;"> Knock
+        </button>
+      </div>
+    </div>
+  </div>
+
 </div><!-- end #battle -->
 
 <!-- Teachable Machine SDK -->
@@ -121,4 +133,3 @@
 
 </body>
 </html>
- 
