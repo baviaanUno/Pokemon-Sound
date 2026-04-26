@@ -188,8 +188,9 @@ async function executeMove(move) {
   }
 
   if (S.ehp <= 0) {
-    await say(`${enemyName} fainted! You win! 🎉`, 3000);
+    await say(`${enemyName} fainted! You win! 🎉`, 2000);
     S.busy = false;
+    setTimeout(() => { window.location.href = 'Victory.html'; }, 800);
     return;
   }
 
@@ -230,11 +231,15 @@ async function enemyTurn() {
   }
 
   if (S.ehp <= 0) {
-    await say(`${enemyName} fainted! You win! 🎉`, 3000);
+    await say(`${enemyName} fainted! You win! 🎉`, 2000);
+    setTimeout(() => { window.location.href = 'Victory.html'; }, 800);
+    return;
   }
 
   if (S.php <= 0) {
-    await say(`${player.name} fainted! Game over.`, 3000);
+    await say(`${player.name} fainted! Game over.`, 2000);
+    setTimeout(() => { window.location.href = 'Defeat.html'; }, 800);
+    return;
   }
 }
 
