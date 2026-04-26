@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gible</title>
+        <link href='https://fonts.googleapis.com/css?family=Finger Paint' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="Gible.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@latest"></script>
+</head>
+<body>
+    <div class="close">
+    <h2>Blow</h2>
+    <img class="knock" src="images/Blowblack.svg" alt="">
+    </div>
+    <div class="box">
+        <div>
+            <img class="pokemon" src="images/image_15_4x.webp" alt="">
+            <h2 class="pokemonnaam">Gible</h2>
+        </div>
+<ul class="moves-list">
+    <li>
+        <div class="move-header">
+            <h2 class="Text">Blow</h2>
+            <img src="images/BlowBlack.svg" alt="" class="move-icon">
+        </div>
+        <p class="description">Deals 15 damage and lowers opponents attack</p>
+    </li>
+
+    <li>
+        <div class="move-header">
+            <h2 class="Text">Howl</h2>
+            <img src="images/Growlblack.svg" alt="" class="move-icon">
+        </div>
+        <p class="description">Lowers opponents defense</p>
+    </li>
+
+    <li>
+        <div class="move-header">
+            <h2 class="Text">Knock</h2>
+            <img src="images/Knockblack.svg" alt="" class="move-icon">
+        </div>
+        <p class="description">Deals 20 damage</p>
+    </li>
+</ul>
+        <div class="blow">
+            <h1>Knock</h1>
+            <img class="blowimg" src="images/Knockwhite.svg" alt="">
+        </div>
+    </div>
+    <script src="voice.js"></script>
+    <script>
+        window.addEventListener('load', initVoice);
+    </script>
+</body>
+</html>

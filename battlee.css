@@ -1,0 +1,363 @@
+/* battlee.css - Battle screen styles */
+
+/* Move list image (bottom right, replacing move buttons) */
+.move-list {
+  position: absolute;
+  bottom: 3%;
+  right: 1.5%;
+  width: 230px;
+  height: auto;
+  z-index: 100;
+}
+
+.move-list img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: monospace;
+}
+
+/* ── BATTLE CONTAINER ── */
+#battle {
+  width: 100%;
+  max-width: 880px;
+  aspect-ratio: 880 / 620;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── BACKGROUND ── */
+.bg-sky {
+  position: absolute;
+  inset: 0;
+  background: #5bb8f5;
+}
+
+.bg-wave {
+  position: absolute;
+  top: 40%;
+  left: -5%;
+  width: 110%;
+  height: 18%;
+  background: #3a9e3a;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+.bg-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 58%;
+  background: #2e8b2e;
+}
+
+/* ── CLOUDS ── */
+.cloud {
+  position: absolute;
+}
+
+.cloud span {
+  display: block;
+  background: white;
+  border-radius: 50px;
+}
+
+.cloud b {
+  display: block;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.c1 { top: 7%; left: 5%; }
+.c1 span { width: 90px; height: 28px; }
+.c1 b:nth-child(2) { width: 48px; height: 48px; top: -22px; left: 14px; }
+.c1 b:nth-child(3) { width: 34px; height: 34px; top: -14px; left: 44px; }
+
+.c2 { top: 5%; left: 35%; }
+.c2 span { width: 76px; height: 28px; }
+.c2 b:nth-child(2) { width: 42px; height: 42px; top: -20px; left: 10px; }
+.c2 b:nth-child(3) { width: 30px; height: 30px; top: -12px; left: 36px; }
+
+/* ── DIRT CIRCLES ── */
+.dirt {
+  position: absolute;
+  background: #b8853a;
+  border-radius: 50%;
+  border: 4px solid #9a6c25;
+}
+
+.dirt-p {
+  width: 110px;
+  height: 46px;
+  bottom: 34%;
+  left: 13%;
+  transform: translateX(-50%);
+}
+
+.dirt-e {
+  width: 110px;
+  height: 46px;
+  bottom: 42%;
+  left: 57%;
+  transform: translateX(-50%);
+}
+
+/* ── SPRITES ── */
+.sprite {
+  position: absolute;
+  width: 80px;
+  image-rendering: pixelated;
+}
+
+/* Charmander (player) — bottom-left */
+.sprite-p {
+  bottom: 39%;
+  left: 8%;
+}
+
+/* Pikachu (enemy) — centre-right */
+.sprite-e {
+  bottom: 47%;
+  left: 53%;
+}
+
+.sprite img {
+  width: 100%;
+  display: block;
+}
+
+/* ── TIMER ── */
+.timer {
+  position: absolute;
+  top: 4%;
+  left: 3%;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid #333;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: bold;
+  color: #222;
+  letter-spacing: 0.5px;
+}
+
+/* ── HUD PANELS ── */
+.hud {
+  position: absolute;
+  background: rgba(100, 140, 200, 0.9);
+  border: 2px solid #2a3a5a;
+  border-radius: 6px;
+  padding: 6px 10px 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 200px;
+}
+
+.hud-p { bottom: 13%; left: 1.5%; }
+.hud-e { top: 3.5%; right: 1.5%; }
+
+/* Diamond avatar frame */
+.hud-diamond {
+  width: 44px;
+  height: 44px;
+  border: 2px solid #fff;
+  background: #555;
+  transform: rotate(45deg);
+  overflow: hidden;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+.hud-diamond img {
+  width: 140%;
+  height: 140%;
+  transform: rotate(-45deg) translate(-14%, -14%);
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.hud-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hud-name {
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+/* ── HP BAR ── */
+.hp-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hp-tag {
+  font-size: 8px;
+  font-weight: bold;
+  color: #aef;
+  letter-spacing: 1px;
+  font-family: monospace;
+}
+
+.hp-track {
+  width: 110px;
+  height: 10px;
+  background: #1a1a1a;
+  border-radius: 5px;
+  border: 1.5px solid #000;
+  overflow: hidden;
+  position: relative;
+}
+
+.hp-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+/* Two-tone shine like the game */
+.hp-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px 4px 0 0;
+}
+
+.hp-nums {
+  font-size: 8px;
+  color: #cef;
+  font-family: monospace;
+  margin-top: 1px;
+}
+
+/* ── MOVE BUTTONS ── */
+.moves {
+  position: absolute;
+  bottom: 3%;
+  right: 1.5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  width: 230px;
+}
+
+.move-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.1s, filter 0.1s;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.move-btn:hover {
+  filter: brightness(1.15);
+  transform: scale(1.04);
+}
+
+.move-btn:active {
+  transform: scale(0.96);
+}
+
+.move-btn img {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+}
+
+/* Fallback colored tiles when image is missing */
+.fallback {
+  width: 100%;
+  padding: 22px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 1.5px;
+  border-radius: 6px;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+}
+
+.clap-bg  { background: #c0392b; }
+.knock-bg { background: #7d3c98; }
+.blow-bg  { background: #c0392b; }
+.growl-bg { background: #888; }
+
+/* ── DIALOG BOX ── */
+.dialog {
+  position: absolute;
+  bottom: 3%;
+  left: 1.5%;
+  width: 52%;
+  background: rgba(170, 170, 170, 0.93);
+  border: 2.5px solid #555;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: #111;
+  font-family: monospace;
+  display: none;
+  line-height: 1.5;
+}
+
+.dialog.on { display: block; }
+
+/* ── LISTENING BADGE ── */
+.listen {
+  position: absolute;
+  top: 3.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 9px;
+  font-family: monospace;
+  padding: 5px 14px;
+  border-radius: 20px;
+  display: none;
+}
+
+.listen.on { display: block; }
+
+/* ── FLASH ANIMATION ── */
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.15; }
+}
+
+.flash { animation: flash 0.3s 3; }

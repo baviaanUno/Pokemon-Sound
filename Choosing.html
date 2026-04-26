@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choosing</title>
+    <link rel="stylesheet" href="choosing.css">
+    <link href='https://fonts.googleapis.com/css?family=Finger Paint' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+</head>
+<body>
+    <h1 class="title">Choose ur Pokémon</h1>
+    <div class="Pokemons">
+    <div>
+        <img class="Pokemon Pikachu" src="images/image_6_4x.webp" alt="Pikachu">
+         <h2 class="Pokemonnaam1">Pikachu</h2>
+            <div class="arrow-container">
+            <div class="arrow-line"></div>
+            <div class="arrow-head"></div>
+            </div>
+         <h2 class="Actie1">Clap</h2>
+         <img class="ImgClap" src="images/Clap.svg" alt="">
+    </div>
+    <div>
+        <img class="Pokemon Charmander" src="images/image_13_4x.webp" alt="Charmander">
+        <h2 class="Pokemonnaam2">Charmander</h2>
+                    <div class="arrow-container2">
+            <div class="arrow-line2"></div>
+            <div class="arrow-head2"></div>
+            </div>
+         <h2 class="Actie2">Blow</h2>
+         <img class="ImgBlow" src="images/Blow.svg" alt="">
+    </div>
+    <div>
+        <img class="Pokemon Gible" src="images/image_15_4x.webp" alt="Gible">
+        <h2 class="Pokemonnaam3">Gible</h2>
+                    <div class="arrow-container3">
+            <div class="arrow-line3"></div>
+            <div class="arrow-head3"></div>
+            </div>
+         <h2 class="Actie3">Knock</h2>
+         <img class="ImgKnock" src="images/Knock.svg" alt="">
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@latest"></script>
+    <script src="voice.js"></script>
+    <script>
+        window.addEventListener('load', initVoice);
+    </script>
+</body>
+</html>

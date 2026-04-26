@@ -1,0 +1,210 @@
+body{
+    background-color: #3A1781;
+}
+
+.title{
+    font-size: 2.5em;
+    font-family: 'Finger Paint';;
+    color: #fff;
+    text-transform: uppercase;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.Pokemon{
+    width: 10em;
+    height: 10em;
+}
+
+.Pokemons{
+    display: flex;
+    flex-direction: row;
+    gap: 15em;
+    justify-content: center;
+    text-align: center;
+}
+
+.Pokemonnaam1{
+    font-size: 1.5em;
+    font-family: 'Inter';
+    color: #fff; 
+    background-color: #BDBD0C;
+    border: 0.4em solid #6B6E0D;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    margin-top: -0.4em;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.Pokemonnaam2{
+    font-size: 1.5em;
+    font-family: 'Inter';
+    color: #fff; 
+    background-color: #760C0C;
+    border: 0.4em solid #9F0F0F;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    margin-top: -0.4em;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.Pokemonnaam3{
+    font-size: 1.5em;
+    font-family: 'Inter';
+    color: #fff; 
+    background-color: #9507CD;
+    border: 0.4em solid #2e093f;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    margin-top: -0.4em;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.Charmander{
+    background-color: #760C0C;
+    padding: 2em;
+    border: 0.5em solid #9F0F0F;
+    border-radius: 15px;
+}
+.Pikachu{
+    background-color: #BDBD0C;
+    padding: 2em;
+    border: 0.5em solid #6B6E0D;
+    border-radius: 15px;
+}
+.Gible{
+    background-color: #9507CD;
+    padding: 2em;
+    border: 0.5em solid #2e093f;
+    border-radius: 15px;
+}
+
+.Actie1{
+    font-size: 1.5em;
+    font-family: 'Inter';
+    color: #fff; 
+    background-color: #BDBD0C;
+    border: 0.3em solid #6B6E0D;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    margin-top: -1em;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 10px 0;    
+    margin-top: -30px;  
+}
+
+.arrow-line {
+    width: 10px;           
+    height: 50px;        
+    margin-top: 0.4em;
+    background-color: #6B6E0D;
+}
+
+.arrow-head {
+    width: 0; 
+    height: 0; 
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 20px solid #6B6E0D; 
+    margin-top: -2px; 
+    margin-bottom: 0.8em;
+}
+
+.Actie2{
+    font-size: 1.5em;
+    font-family: 'Inter';
+    color: #fff; 
+    background-color: #760C0C;
+    border: 0.4em solid #9F0F0F;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    margin-top: -1em;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.arrow-container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 10px 0;    
+    margin-top: -30px;  
+}
+
+.arrow-line2 {
+    width: 10px;           
+    height: 50px;        
+    margin-top: 0.4em;    
+    background-color: #9F0F0F; 
+}
+
+.arrow-head2 {
+    width: 0; 
+    height: 0; 
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 20px solid #9F0F0F; 
+    margin-top: -2px; 
+    margin-bottom: 0.8em;
+}
+
+.Actie3{
+    font-size: 1.5em;
+    font-family: 'Inter';
+    color: #fff; 
+    background-color: #9507CD;
+    border: 0.4em solid #2e093f;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    margin-top: -1em;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.arrow-container3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 10px 0;    
+    margin-top: -30px;  
+}
+
+.arrow-line3 {
+    width: 10px;           
+    height: 50px;        
+    margin-top: 0.4em;       
+    background-color: #2e093f; 
+}
+
+.arrow-head3 {
+    width: 0; 
+    height: 0; 
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 20px solid #2e093f; 
+    margin-top: -2px; 
+    margin-bottom: 0.8em;
+}
+.ImgClap{
+    width: 7em;
+    height: 7em;
+}
+.ImgBlow{
+    width: 7em;
+    height: 7em;
+}
+.ImgKnock{
+    width: 7em;
+    height: 7em;
+}

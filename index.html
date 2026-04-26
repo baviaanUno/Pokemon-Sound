@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Sound</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Finger Paint' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@latest"></script>
+</head>
+<body>
+    <div class="start">
+    <img class="logo" src="images/group_18_1x.webp" alt="pokemonlogo">
+    <button class="button" type="button">Clap👏</button>
+    </div>
+ 
+    <script src="voice.js"></script>
+    <script>
+        window.addEventListener('load', initVoice);
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+body{
+    background-color: #3A1781;
+}
+.start{
+    margin-top: 5em;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    gap: 7em;
+}
+.logo{
+    width: 30em;
+}
+.button{
+    background-color: #0A6D3C;
+    border: 0.2em solid #024804 ;
+    border-radius: 10px;
+    font-size: 3.5em;
+    font-family: 'Finger Paint';;
+    color: #fff;
+    text-transform: uppercase;
+    width: 7em;
+    justify-self: center;
+}
+.how{
+    font-family: 'Inter';
+    font-size: 3em;
+    color: #FFE4E4;
+    text-shadow: -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000;
+    transform: rotate(20deg);
+    position: fixed;
+    bottom: 3em;
+    left: 2em;
+       
+}
