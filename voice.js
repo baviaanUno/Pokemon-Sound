@@ -3,6 +3,26 @@
    Handles Teachable Machine audio + routing
 ═══════════════════════════════════════════ */
 
+/* ── STORAGE ERROR HANDLING ── */
+// Handle Tracking Prevention blocking localStorage
+const storage = {
+  getItem: (key) => {
+    try {
+      return localStorage.getItem(key);
+    } catch (e) {
+      console.warn('[Storage] Blocked:', e.message);
+      return null;
+    }
+  },
+  setItem: (key, value) => {
+    try {
+      localStorage.setItem(key, value);
+    } catch (e) {
+      console.warn('[Storage] Blocked:', e.message);
+    }
+  }
+};
+
 /* ── POKEMON DATA ── */
 const POKEDEX = {
   pikachu: {
@@ -60,10 +80,10 @@ const POKEDEX = {
 
 /* ── SAVE / LOAD CHOSEN POKEMON ── */
 function saveChoice(pokemonKey) {
-  localStorage.setItem('chosenPokemon', pokemonKey);
+  storage.setItem('chosenPokemon', pokemonKey);
 }
 function loadChoice() {
-  return localStorage.getItem('chosenPokemon') || 'charmander';
+  return storage.getItem('chosenPokemon') || 'charmander';
 }
 
 /* ── DETECT CURRENT PAGE ── */
@@ -129,9 +149,16 @@ async function initVoice() {
     const checkpointURL = baseURL + 'model.json';
     const metadataURL   = baseURL + 'metadata.json';
 
-    recognizer = speechCommands.create(
-      'BROWSER_FFT', undefined, checkpointURL, metadataURL
-    );
+    // Try with forced 44.1kHz sample rate to match Teachable Machine model
+    let audioConfig = { sampleRateHz: 44100 };
+    try {
+      recognizer = speechCommands.create('BROWSER_FFT', audioConfig, checkpointURL, metadataURL);
+    } catch (rateErr) {
+      // If 44.1kHz fails, try default (handles sampling rate mismatch)
+      console.warn('[Voice] Sample rate 44100 failed, trying default:', rateErr.message);
+      recognizer = speechCommands.create('BROWSER_FFT', undefined, checkpointURL, metadataURL);
+    }
+    
     await recognizer.ensureModelLoaded();
 
     const labels = recognizer.wordLabels();
