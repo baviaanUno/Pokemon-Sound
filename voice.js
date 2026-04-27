@@ -139,16 +139,35 @@ async function initVoice() {
 
     setListeningUI(true);
 
-    recognizer.listen(result => {
-      const scores  = result.scores;
-      const topIdx  = scores.indexOf(Math.max(...scores));
-      const topScore = scores[topIdx];
-      const topLabel = labels[topIdx];
+const HOLD_DURATION_MS = 1000; // must be detected for 1 seconds
+let holdLabel = null;
+let holdStart = null;
 
-      if (topScore > 0.80) {
+recognizer.listen(result => {
+  const scores   = result.scores;
+  const topIdx   = scores.indexOf(Math.max(...scores));
+  const topScore = scores[topIdx];
+  const topLabel = labels[topIdx];
+
+  if (topScore > 0.80) {
+    if (topLabel === holdLabel) {
+      // Same label still going — check if 2s have elapsed
+      if (holdStart && (Date.now() - holdStart >= HOLD_DURATION_MS)) {
         handleVoiceCommand(topLabel);
+        holdLabel = null; // reset so it doesn't keep firing
+        holdStart = null;
       }
-    }, {
+    } else {
+      // New label detected — start the clock
+      holdLabel = topLabel;
+      holdStart = Date.now();
+    }
+  } else {
+    // Confidence dropped — reset everything
+    holdLabel = null;
+    holdStart = null;
+  }
+}, {
       includeSpectrogram: true,
       probabilityThreshold: 0.75,
       invokeCallbackOnNoiseAndUnknown: true,
