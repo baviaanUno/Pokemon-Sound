@@ -44,7 +44,7 @@
          <img class="ImgKnock" src="images/Knock.svg" alt="">
     </div>
     </div>
-    <div id="voice-indicator" style="
+<div id="voice-indicator" style="
   position: fixed;
   bottom: 1.2em;
   left: 1.2em;
@@ -56,8 +56,26 @@
   border-radius: 20px;
   z-index: 9999;
   display: none;
-  transition: opacity 0.3s;
-">👂 …</div>
+  min-width: 160px;
+">
+  <div id="voice-label" style="margin-bottom: 5px;">👂 …</div>
+  <div style="
+    background: #111;
+    border-radius: 10px;
+    height: 8px;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #333;
+  ">
+    <div id="voice-bar" style="
+      height: 100%;
+      width: 0%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #111, #4cff4c);
+      transition: width 0.1s linear;
+    "></div>
+  </div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@latest"></script>
     <script src="voice.js"></script>
