@@ -9,7 +9,7 @@ body{
     margin-top: 1em;
 }
 .close{
-     font-size: 1.5em;
+     font-size: 1em;
     font-family: 'Finger Paint';;
     color: #fff;
     background-color: #990000;
@@ -34,7 +34,7 @@ body{
     margin-left: 20em;
     margin-right: 15em;
     border-radius: 30px;
-    margin-top: -100px;
+    margin-top: -90px;
 
 }
 
@@ -47,7 +47,7 @@ body{
     color: white;
     list-style-type: disc;
   margin-left: 2em;
-   font-size: 2em;
+   font-size: 1.8em;
     font-family: 'Inter';
     justify-self: start;
 
