@@ -149,6 +149,18 @@ recognizer.listen(result => {
   const topScore = scores[topIdx];
   const topLabel = labels[topIdx];
 
+  // ── VOICE INDICATOR ──
+  const indicator = document.getElementById('voice-indicator');
+  if (indicator) {
+    if (topScore > 0.60) {
+      indicator.style.display = 'block';
+      indicator.textContent = '👂 ' + topLabel;
+    } else {
+      indicator.style.display = 'none';
+    }
+  }
+  // ─────────────────────
+
   if (topScore > 0.80) {
     if (topLabel === holdLabel) {
       // Same label still going — check if 2s have elapsed
