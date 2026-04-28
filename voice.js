@@ -139,7 +139,7 @@ async function initVoice() {
 
     setListeningUI(true);
 
-const HOLD_DURATION_MS = 0; // must be detected for 1 seconds
+const HOLD_DURATION_MS = 1000; // must be detected for 1 seconds
 let holdLabel = null;
 let holdStart = null;
 
@@ -149,35 +149,50 @@ recognizer.listen(result => {
   const topScore = scores[topIdx];
   const topLabel = labels[topIdx];
 
-  // ── VOICE INDICATOR ──
+  // ── VOICE INDICATOR BAR ──
   const indicator = document.getElementById('voice-indicator');
-  if (indicator) {
+  const label     = document.getElementById('voice-label');
+  const bar       = document.getElementById('voice-bar');
+  if (indicator && label && bar) {
     if (topScore > 0.60) {
       indicator.style.display = 'block';
-      indicator.textContent = '👂 ' + topLabel;
+      label.textContent = '👂 ' + topLabel;
+      // Fill bar based on how long hold has been going (0 to HOLD_DURATION_MS)
+      const elapsed = (holdLabel === topLabel && holdStart)
+        ? Date.now() - holdStart
+        : 0;
+      const pct = Math.min(100, (elapsed / HOLD_DURATION_MS) * 100);
+      bar.style.width = pct + '%';
     } else {
       indicator.style.display = 'none';
+      bar.style.width = '0%';
     }
   }
-  // ─────────────────────
+  // ─────────────────────────
 
   if (topScore > 0.80) {
     if (topLabel === holdLabel) {
-      // Same label still going — check if 2s have elapsed
       if (holdStart && (Date.now() - holdStart >= HOLD_DURATION_MS)) {
         handleVoiceCommand(topLabel);
-        holdLabel = null; // reset so it doesn't keep firing
+        holdLabel = null;
         holdStart = null;
       }
-    } else {
-      // New label detected — start the clock
-      holdLabel = topLabel;
-      holdStart = Date.now();
+} else {
+      // Only reset if it's a genuinely different label above threshold
+      if (topScore > 0.80 && topLabel !== holdLabel) {
+        holdLabel = topLabel;
+        holdStart = Date.now();
+        const bar = document.getElementById('voice-bar');
+        if (bar) {
+          bar.style.transition = 'none';
+          bar.style.width = '0%';
+          setTimeout(() => { bar.style.transition = 'width 0.1s linear'; }, 50);
+        }
+      }
     }
-  } else {
-    // Confidence dropped — reset everything
-    holdLabel = null;
-    holdStart = null;
+} else {
+    // Confidence dropped — don't reset holdLabel, just don't advance the clock
+    // This way the same sound coming back won't restart the bar
   }
 }, {
       includeSpectrogram: true,

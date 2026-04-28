@@ -17,7 +17,7 @@
     <img class="logo" src="images/group_18_1x.webp" alt="pokemonlogo">
     <button class="button" type="button">Clap to start👏</button>
     </div>
-        <div id="voice-indicator" style="
+<div id="voice-indicator" style="
   position: fixed;
   bottom: 1.2em;
   left: 1.2em;
@@ -29,8 +29,26 @@
   border-radius: 20px;
   z-index: 9999;
   display: none;
-  transition: opacity 0.3s;
-">👂 …</div>
+  min-width: 160px;
+">
+  <div id="voice-label" style="margin-bottom: 5px;">👂 …</div>
+  <div style="
+    background: #111;
+    border-radius: 10px;
+    height: 8px;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #333;
+  ">
+    <div id="voice-bar" style="
+      height: 100%;
+      width: 0%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #111, #4cff4c);
+      transition: width 0.1s linear;
+    "></div>
+  </div>
+</div>
  
     <script src="voice.js"></script>
     <script>
