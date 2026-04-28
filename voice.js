@@ -139,7 +139,7 @@ async function initVoice() {
 
     setListeningUI(true);
 
-const HOLD_DURATION_MS = 1000; // must be detected for 1 seconds
+const HOLD_DURATION_MS = 500; // must be detected for 1 seconds
 let holdLabel = null;
 let holdStart = null;
 
