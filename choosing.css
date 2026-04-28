@@ -28,7 +28,7 @@ body{
 .Pokemonnaam1{
     font-size: 1.5em;
     font-family: 'Inter';
-    color: #fff; 
+    color: black; 
     background-color: #BDBD0C;
     border: 0.4em solid #6B6E0D;
     padding-top: 0.3em;
@@ -86,7 +86,7 @@ body{
 .Actie1{
     font-size: 1.5em;
     font-family: 'Inter';
-    color: #fff; 
+    color: black; 
     background-color: #BDBD0C;
     border: 0.3em solid #6B6E0D;
     padding-top: 0.3em;
