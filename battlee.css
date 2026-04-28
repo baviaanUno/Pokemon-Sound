@@ -184,7 +184,6 @@ body {
   border: 2px solid #fff;
   background: #555;
   transform: rotate(45deg);
-  overflow: hidden;
   flex-shrink: 0;
   border-radius: 2px;
 }
@@ -193,8 +192,8 @@ body {
   width: 140%;
   height: 140%;
   transform: rotate(-45deg) translate(-14%, -14%);
-  object-fit: cover;
-  image-rendering: pixelated;
+  margin-left: 1em;
+  padding-bottom: 1em;
 }
 
 .hud-body {
@@ -337,20 +336,6 @@ body {
 
 .dialog.on { display: block; }
 
-/* ── LISTENING BADGE ── */
-.listen {
-  position: absolute;
-  top: 3.5%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  font-size: 9px;
-  font-family: monospace;
-  padding: 5px 14px;
-  border-radius: 20px;
-  display: none;
-}
 
 .listen.on { display: block; }
 
