@@ -85,6 +85,9 @@ function initBattleUI() {
   } else if (chosenKey === 'gible') {
     moveListImg.src = 'images/Gible.png';
   }
+
+  // Start the 2-minute timer
+  startTimer();
 }
 
 /* ── BUILD MOVE BUTTONS FROM PLAYER DATA ── */
@@ -453,7 +456,6 @@ async function triggerEnemyMoveAnimation(moveName) {
 async function executeMove(move) {
   if (S.busy || S.ehp <= 0 || S.php <= 0) return;
   S.busy = true;
-  startTimer();
 
   await say(`${player.name} used ${move.name}!`);
 
