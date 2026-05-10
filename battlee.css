@@ -351,3 +351,134 @@ body {
 #spr-player, #spr-enemy, #hud-player-icon, #hud-enemy-icon {
   transition: opacity 0.8s;
 }
+
+/* ════════════════════════════════════════════════════════
+   MOVE ANIMATIONS
+   ════════════════════════════════════════════════════════ */
+
+/* ── RED BEAM ANIMATION (BLOW) ── */
+@keyframes redBeam {
+  0% {
+    width: 0;
+    opacity: 1;
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff3333;
+  }
+  85% {
+    width: 100%;
+    opacity: 1;
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff3333;
+  }
+  100% {
+    width: 100%;
+    opacity: 0;
+    box-shadow: 0 0 20px #ff0000, 0 0 30px #ff3333;
+  }
+}
+
+.move-beam-red {
+  position: absolute;
+  height: 8px;
+  background: linear-gradient(90deg, #ff0000, #ff6666);
+  border-radius: 4px;
+  animation: redBeam 0.6s ease-out forwards;
+  pointer-events: none;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  z-index: 50;
+}
+
+/* ── YELLOW/WHITE LIGHTNING BEAM ANIMATION (CLAP) ── */
+@keyframes yellowBeam {
+  0% {
+    width: 0;
+    opacity: 1;
+    box-shadow: 0 0 15px #ffff00, 0 0 25px #ffdd00, inset 0 0 10px #ffffff;
+  }
+  50% {
+    box-shadow: 0 0 20px #ffff00, 0 0 30px #ffdd00, inset 0 0 15px #ffffff;
+  }
+  85% {
+    width: 100%;
+    opacity: 1;
+    box-shadow: 0 0 15px #ffff00, 0 0 25px #ffdd00, inset 0 0 10px #ffffff;
+  }
+  100% {
+    width: 100%;
+    opacity: 0;
+    box-shadow: 0 0 25px #ffff00, 0 0 35px #ffdd00;
+  }
+}
+
+.move-beam-yellow {
+  position: absolute;
+  height: 10px;
+  background: linear-gradient(90deg, #ffff00, #ffffff, #ffdd00);
+  border-radius: 5px;
+  animation: yellowBeam 0.6s ease-out forwards;
+  pointer-events: none;
+  top: 48%;
+  left: 10%;
+  transform: translateY(-50%);
+  z-index: 50;
+}
+
+/* ── FALLING ORB ANIMATION (HOWL, GROWL) ── */
+@keyframes orbFall {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(80px) scale(0.3);
+    opacity: 0;
+  }
+}
+
+.move-orb {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle at 30% 30%, #ff6666, #cc0000);
+  border-radius: 50%;
+  animation: orbFall 0.8s ease-in forwards;
+  pointer-events: none;
+  box-shadow: 0 0 8px #ff0000;
+  z-index: 45;
+}
+
+/* ── FIST PUNCH ANIMATION (KNOCK) ── */
+@keyframes fistPunch {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(0.95);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+.move-fist {
+  position: absolute;
+  font-size: 48px;
+  animation: fistPunch 2.2s ease-out forwards;
+  pointer-events: none;
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+}

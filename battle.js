@@ -183,6 +183,272 @@ function applyEffect(effect, target) {
   return null;
 }
 
+/* ════════════════════════════════════════════════════════
+   MOVE ANIMATIONS
+   ════════════════════════════════════════════════════════ */
+
+/* ── ANIMATE RED BEAM (BLOW) ── */
+function animateRedBeam() {
+  return new Promise(resolve => {
+    const battle = $('battle');
+    const beam = document.createElement('div');
+    beam.className = 'move-beam-red';
+    battle.appendChild(beam);
+    beam.addEventListener('animationend', () => {
+      beam.remove();
+      resolve();
+    }, { once: true });
+  });
+}
+
+/* ── ANIMATE YELLOW/WHITE LIGHTNING BEAM (CLAP) ── */
+function animateYellowBeam() {
+  return new Promise(resolve => {
+    const battle = $('battle');
+    const beam = document.createElement('div');
+    beam.className = 'move-beam-yellow';
+    battle.appendChild(beam);
+    beam.addEventListener('animationend', () => {
+      beam.remove();
+      resolve();
+    }, { once: true });
+  });
+}
+
+/* ── ANIMATE FALLING ORBS (HOWL, GROWL) ── */
+function animateFallingOrbs() {
+  return new Promise(resolve => {
+    const battle = $('battle');
+    const enemy = $('spr-enemy');
+    
+    if (!enemy) {
+      resolve();
+      return;
+    }
+    
+    // Get enemy sprite position
+    const rect = enemy.getBoundingClientRect();
+    const battleRect = battle.getBoundingClientRect();
+    
+    // Calculate relative position within battle container
+    const relX = rect.left - battleRect.left;
+    const relY = rect.top - battleRect.top;
+    
+    // Create 3-4 orbs
+    const orbCount = Math.random() > 0.5 ? 3 : 4;
+    let orbsCreated = 0;
+    let orbsFinished = 0;
+    
+    for (let i = 0; i < orbCount; i++) {
+      const orb = document.createElement('div');
+      orb.className = 'move-orb';
+      
+      // Random horizontal offset around the enemy sprite
+      const offsetX = (Math.random() - 0.5) * 60;
+      const startY = relY + 10;
+      const startX = relX + 40 + offsetX; // Center on sprite (sprite is ~80px wide)
+      
+      orb.style.left = startX + 'px';
+      orb.style.top = startY + 'px';
+      orb.style.animationDelay = (i * 0.15) + 's'; // Stagger animation
+      
+      battle.appendChild(orb);
+      orbsCreated++;
+      
+      orb.addEventListener('animationend', () => {
+        orb.remove();
+        orbsFinished++;
+        if (orbsFinished === orbsCreated) {
+          resolve();
+        }
+      }, { once: true });
+    }
+  });
+}
+
+/* ── ANIMATE FIST PUNCH (KNOCK) ── */
+function animateFist() {
+  return new Promise(resolve => {
+    const battle = $('battle');
+    const enemy = $('spr-enemy');
+    
+    if (!enemy) {
+      resolve();
+      return;
+    }
+    
+    // Get enemy sprite position
+    const rect = enemy.getBoundingClientRect();
+    const battleRect = battle.getBoundingClientRect();
+    
+    // Calculate relative position within battle container
+    const relX = rect.left - battleRect.left;
+    const relY = rect.top - battleRect.top;
+    
+    const fist = document.createElement('div');
+    fist.className = 'move-fist';
+    fist.textContent = '✊';
+    
+    // Center on enemy sprite
+    fist.style.left = (relX + 15) + 'px';
+    fist.style.top = (relY + 10) + 'px';
+    
+    battle.appendChild(fist);
+    fist.addEventListener('animationend', () => {
+      fist.remove();
+      resolve();
+    }, { once: true });
+  });
+}
+
+/* ── TRIGGER MOVE ANIMATION ── */
+async function triggerMoveAnimation(moveName) {
+  moveName = moveName.toLowerCase();
+  
+  if (moveName === 'blow') {
+    return await animateRedBeam();
+  } else if (moveName === 'clap') {
+    return await animateYellowBeam();
+  } else if (moveName === 'howl' || moveName === 'growl') {
+    return await animateFallingOrbs();
+  } else if (moveName === 'knock') {
+    return await animateFist();
+  }
+}
+
+/* ── ANIMATE YELLOW BEAM TO PLAYER (ENEMY THUNDERSHOCK, CLAP) ── */
+function animateYellowBeamToPlayer() {
+  return new Promise(resolve => {
+    const battle = $('battle');
+    const beam = document.createElement('div');
+    beam.className = 'move-beam-yellow';
+    beam.style.left = 'auto';
+    beam.style.right = '10%';
+    beam.style.transform = 'translateY(-50%) scaleX(-1)';
+    battle.appendChild(beam);
+    beam.addEventListener('animationend', () => {
+      beam.remove();
+      resolve();
+    }, { once: true });
+  });
+}
+
+/* ── ANIMATE RED BEAM TO PLAYER (ENEMY EMBER) ── */
+function animateRedBeamToPlayer() {
+  return new Promise(resolve => {
+    const battle = $('battle');
+    const beam = document.createElement('div');
+    beam.className = 'move-beam-red';
+    beam.style.left = 'auto';
+    beam.style.right = '10%';
+    beam.style.transform = 'translateY(-50%) scaleX(-1)';
+    battle.appendChild(beam);
+    beam.addEventListener('animationend', () => {
+      beam.remove();
+      resolve();
+    }, { once: true });
+  });
+}
+
+/* ── ANIMATE FIST TO PLAYER (ENEMY ATTACKS) ── */
+function animateFistToPlayer() {
+  return new Promise(resolve => {
+    const battle = $('battle');
+    const player = $('spr-player');
+    
+    if (!player) {
+      resolve();
+      return;
+    }
+    
+    const rect = player.getBoundingClientRect();
+    const battleRect = battle.getBoundingClientRect();
+    
+    const relX = rect.left - battleRect.left;
+    const relY = rect.top - battleRect.top;
+    
+    const fist = document.createElement('div');
+    fist.className = 'move-fist';
+    fist.textContent = '✊';
+    
+    fist.style.left = (relX + 15) + 'px';
+    fist.style.top = (relY + 10) + 'px';
+    
+    battle.appendChild(fist);
+    fist.addEventListener('animationend', () => {
+      fist.remove();
+      resolve();
+    }, { once: true });
+  });
+}
+
+/* ── ANIMATE FALLING ORBS TO PLAYER (ENEMY SAND ATTACK, GROWL) ── */
+function animateFallingOrbsToPlayer() {
+  return new Promise(resolve => {
+    const battle = $('battle');
+    const player = $('spr-player');
+    
+    if (!player) {
+      resolve();
+      return;
+    }
+    
+    const rect = player.getBoundingClientRect();
+    const battleRect = battle.getBoundingClientRect();
+    
+    const relX = rect.left - battleRect.left;
+    const relY = rect.top - battleRect.top;
+    
+    const orbCount = Math.random() > 0.5 ? 3 : 4;
+    let orbsCreated = 0;
+    let orbsFinished = 0;
+    
+    for (let i = 0; i < orbCount; i++) {
+      const orb = document.createElement('div');
+      orb.className = 'move-orb';
+      
+      const offsetX = (Math.random() - 0.5) * 60;
+      const startY = relY + 10;
+      const startX = relX + 40 + offsetX;
+      
+      orb.style.left = startX + 'px';
+      orb.style.top = startY + 'px';
+      orb.style.animationDelay = (i * 0.15) + 's';
+      
+      battle.appendChild(orb);
+      orbsCreated++;
+      
+      orb.addEventListener('animationend', () => {
+        orb.remove();
+        orbsFinished++;
+        if (orbsFinished === orbsCreated) {
+          resolve();
+        }
+      }, { once: true });
+    }
+  });
+}
+
+/* ── TRIGGER ENEMY MOVE ANIMATION ── */
+async function triggerEnemyMoveAnimation(moveName) {
+  moveName = moveName.toLowerCase();
+  
+  // Enemy moves target the player, so we animate on player sprite
+  if (moveName === 'thundershock' || moveName === 'clap') {
+    return await animateYellowBeamToPlayer();
+  } else if (moveName === 'quick attack' || moveName === 'scratch' || moveName === 'bite') {
+    return await animateFistToPlayer();
+  } else if (moveName === 'ember') {
+    return await animateRedBeamToPlayer();
+  } else if (moveName === 'sand attack') {
+    return await animateFallingOrbsToPlayer();
+  } else if (moveName === 'dragon rage') {
+    return await animateYellowBeamToPlayer();
+  } else if (moveName === 'growl') {
+    return await animateFallingOrbsToPlayer();
+  }
+}
+
 /* ── EXECUTE PLAYER MOVE ── */
 async function executeMove(move) {
   if (S.busy || S.ehp <= 0 || S.php <= 0) return;
@@ -191,11 +457,17 @@ async function executeMove(move) {
 
   await say(`${player.name} used ${move.name}!`);
 
+  // Trigger move animation and WAIT for it to complete
+  await triggerMoveAnimation(move.name);
+
   // Apply damage
   const dmg = Math.round(move.dmg * S.atkMod);
   if (dmg > 0) {
     setHP('e', S.ehp - dmg);
     flash('spr-enemy');
+    playHit(); // Play hit sound effect
+    // Show damage effectiveness message
+    await say(`${move.name} was effective against ${enemyName}!`);
   }
 
   // Apply effect
@@ -206,6 +478,7 @@ async function executeMove(move) {
 
   if (S.ehp <= 0) {
     fadeOutSpriteAndIcon('e');
+    playDeath(); // Play death sound effect
     await say(`${enemyName} fainted! You win! 🎉`, 2000);
     S.busy = false;
     setTimeout(() => { window.location.href = 'Victory.html'; }, 800);
@@ -231,10 +504,16 @@ async function enemyTurn() {
 
     await say(`${enemyName} used ${picked.name}!`);
 
+    // Trigger enemy move animation and WAIT for it to complete
+    await triggerEnemyMoveAnimation(picked.name);
+
     const dmg = Math.round(picked.dmg * S.eAtkMod);
     if (dmg > 0) {
       setHP('p', S.php - dmg);
       flash('spr-player');
+      playHit(); // Play hit sound effect
+      // Show damage effectiveness message
+      await say(`${picked.name} was effective against ${player.name}!`);
     }
 
     if (picked.effect === 'lowerAtk') {
@@ -251,6 +530,8 @@ async function enemyTurn() {
   }
 
   if (S.ehp <= 0) {
+    fadeOutSpriteAndIcon('e');
+    playDeath(); // Play death sound effect
     await say(`${enemyName} fainted! You win! 🎉`, 2000);
     setTimeout(() => { window.location.href = 'Victory.html'; }, 800);
     return;
@@ -258,6 +539,7 @@ async function enemyTurn() {
 
   if (S.php <= 0) {
     fadeOutSpriteAndIcon('p');
+    playDeath(); // Play death sound effect
     await say(`${player.name} fainted! Game over.`, 2000);
     setTimeout(() => { window.location.href = 'Defeat.html'; }, 800);
     return;
